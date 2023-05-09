@@ -1,0 +1,160 @@
+let id = 0;
+const br = document.createElement('br')
+const submit = () => {
+    let type = document.querySelector('#type').value;
+    let label = document.querySelector('#label').value;
+    let placeholder = document.querySelector('#placeholder').value;
+    switch(type){
+        case 'text' : appendText(label, placeholder);
+            break
+        case 'Radio': appendRadio(label, placeholder);
+            break
+        case 'checkbox': appendCheckbox(label, placeholder);
+    }
+}
+const changePlaceholder = () => {
+    let type = document.querySelector('#type').value;
+    switch (type){
+        case 'text': 
+            document.querySelector('#label').value = ""
+            document.querySelector('#placeholder').value = ""
+            document.querySelector('#placeholder').setAttribute('placeholder', 'placeholder')
+            break
+        case 'Radio': 
+            document.querySelector('#label').value = ""
+            document.querySelector('#placeholder').value = ""
+            document.querySelector('#placeholder').setAttribute('placeholder', 'Number of Choices')
+            break
+        case 'checkbox': 
+            document.querySelector('#label').value = ""
+            document.querySelector('#placeholder').value = ""
+            document.querySelector('#placeholder').setAttribute('placeholder', 'Number of Choices')
+            break
+    }
+    
+}
+const appendText = (label = 'no Label', placeholder = 'no placeholder') => {
+    id += 1;
+    const PID = id; 
+    let container = document.createElement('div');
+    container.setAttribute('class', 'mx-auto border border-success p-1')
+    container.setAttribute('style', 'width:75%')
+    let labelT = document.createElement('p');
+    let del = document.createElement('button');
+    del.innerHTML = "del";
+    del.setAttribute('onclick', 'del('+ PID +')');
+    del.setAttribute('style', 'margin-top: 20px')
+    labelT.innerHTML = label;
+    container.setAttribute('id', id);
+    let el = document.createElement('input');
+    el.setAttribute('placeholder', placeholder);
+    el.setAttribute('style','margin-left:20px; width:50%')
+    container.append(labelT)
+    container.append(el)
+    container.append(br)
+    container.append(del)
+    document.querySelector('#results').append(container);
+
+}
+
+const appendRadio = (label ='no label', placeholder ='no placeholder') => {
+    id += 1;
+    const PID = id;
+    let i = 0 
+    var inID = ''
+    let container = document.createElement('div');
+    container.setAttribute('class', 'mx-auto border border-success p-1')
+    container.setAttribute('style', 'width:75%')
+    let labelT = document.createElement('p');
+    let form = document.createElement('form');
+    labelT.innerHTML = label;
+    for(i=0; i < parseInt(placeholder); i++){
+        inID = i+'s'
+        var choice = document.createElement('input');
+        choice.setAttribute('name', 'choices')
+        var choiceLabel = document.createElement('input');
+        choiceLabel.setAttribute('id', inID)
+        choiceLabel.setAttribute('style','margin-left:20px; width:50%')
+        choice.setAttribute("ondblclick", "changeData('"+inID+"')")
+
+        choiceLabel.disabled = true
+        
+        var br = document.createElement('br')
+        choiceLabel.setAttribute('placeholder', 'answer')
+        choice.setAttribute('type', 'radio')
+        choice.setAttribute('style', 'margin-left:20px;')
+        form.append(choice)
+        form.append(choiceLabel)
+        form.append(br)
+
+        
+    }
+    let del = document.createElement('button');
+    del.innerHTML = "del";
+    del.setAttribute('onclick', 'del('+ PID +')');
+    del.setAttribute('style', 'margin-top: 20px')
+    container.setAttribute('id', id);
+    let el = document.createElement('input');
+    el.setAttribute('type', 'radio')
+    container.append(labelT)
+    container.append(br)
+    container.append(form)
+    container.append(del)
+    document.querySelector('#results').append(container);
+}
+
+const appendCheckbox = (label ='no label', placeholder ='no placeholder') => {
+    id += 1;
+    const PID = id;
+    let i = 0 
+    var inID = ''
+    let container = document.createElement('div');
+    container.setAttribute('class', 'mx-auto border border-success p-1')
+    container.setAttribute('style', 'width:75%')
+    let labelT = document.createElement('p');
+    let form = document.createElement('form');
+    labelT.innerHTML = label;
+    for(i=0; i < parseInt(placeholder); i++){
+        inID = i+'d'
+        var choice = document.createElement('input');
+        choice.setAttribute('name', 'choices')
+        var choiceLabel = document.createElement('input');
+        choiceLabel.setAttribute('id', inID)
+        choice.setAttribute("ondblclick", "changeData('"+inID+"')")
+        choice.setAttribute('style', 'margin-left:20px;')
+        choiceLabel.setAttribute('style','margin-left:20px; width:50%')
+        choiceLabel.disabled = true
+        
+        var br = document.createElement('br')
+        choiceLabel.setAttribute('placeholder', 'answer')
+        choice.setAttribute('type', 'checkbox')
+        form.append(choice)
+        form.append(choiceLabel)
+        form.append(br)
+
+        
+    }
+    let del = document.createElement('button');
+    del.innerHTML = "del";
+    del.setAttribute('onclick', 'del('+ PID +')');
+    del.setAttribute('style', 'margin-top: 20px')
+    container.setAttribute('id', id);
+    let el = document.createElement('input');
+    el.setAttribute('type', 'radio')
+    container.append(labelT)
+    container.append(br)
+    container.append(form)
+    container.append(del)
+    document.querySelector('#results').append(container);
+}
+
+const del = (del) =>{
+    document.getElementById(del).remove(this);
+}
+const changeData = (id) => {
+    if(document.getElementById(id).disabled == false){
+        document.getElementById(id).disabled = true
+    } else {
+        document.getElementById(id).disabled = false
+    }
+}
