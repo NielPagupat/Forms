@@ -80,7 +80,7 @@ const appendRadio = (label ='no label', placeholder ='no placeholder') => {
         choiceLabel.disabled = true
         
         var br = document.createElement('br')
-        choiceLabel.setAttribute('placeholder', 'answer')
+        choiceLabel.setAttribute('placeholder', 'double click radio button to edit')
         choice.setAttribute('type', 'radio')
         choice.setAttribute('style', 'margin-left:20px;')
         form.append(choice)
@@ -126,7 +126,7 @@ const appendCheckbox = (label ='no label', placeholder ='no placeholder') => {
         choiceLabel.disabled = true
         
         var br = document.createElement('br')
-        choiceLabel.setAttribute('placeholder', 'answer')
+        choiceLabel.setAttribute('placeholder', 'double click checkbox to edit')
         choice.setAttribute('type', 'checkbox')
         form.append(choice)
         form.append(choiceLabel)
